@@ -1,0 +1,644 @@
+%%
+%% autor: David Mihola
+%% login: xmihol00
+%% IEL projekt
+%% zimní semestr 2019
+
+
+%% Můj první projekt v LaTex.
+
+\documentclass[a4paper,12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\usepackage{fixmath}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{siunitx}
+\usepackage{gensymb}
+\makeatletter
+\newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\makeatother
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0em}
+\def\infinity{\rotatebox{90}{8}}
+\usepackage{titlesec}
+\usepackage[czech]{babel}
+\usepackage{hyperref}
+\makeatletter
+   \renewcommand\l@subsection{\@dottedtocline{2}{1.5em}{3.2em}}
+\makeatother
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand{\RN}[1]{%
+  \textup{\uppercase\expandafter{\romannumeral#1}}%
+}
+
+\makeatletter
+
+\renewcommand{\@seccntformat}[1]{%
+  \ifcsname prefix@#1\endcsname
+  \csname prefix@#1\endcsname
+  \else
+  \csname the#1\endcsname\quad
+  \fi}
+
+\newcommand\prefix@section{}
+
+\makeatother
+
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+\renewcommand\thesection{\Roman{section}}
+\renewcommand\thesubsection{\thesection.\Roman{subsection}}
+
+\begin{document}
+\begin{figure}
+
+\vspace{5em}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{logo_cz.png}
+\end{center}
+\end{figure}
+\begin{center}
+{\LARGE IEL -- protokol k projektu}\par
+\vspace{1em}
+{\large David Mihola\par xmihol00\par
+\vspace{1em}
+15. prosince 2019}
+\end{center}
+
+\newpage
+%\input{00-projekt.tex} \newpage
+\tableofcontents
+\newpage
+\section{Příklad č. 1: zadání D}
+Stanovte napětí $U_{R5}$ a proud $I_{R5}$. Použijte metodu postupného zjednodušování obvodu.\par\vspace{1.5em}
+$U_1=105\;\si{\volt}$, $U_2=85\;\si{\volt}$, $R_1=420\;\si{\Omega}$, $R_2=980\;\si{\Omega}$, $R_3=330\;\si{\Omega}$, $R_4=280\;\si{\Omega}$, $R_5=310\;\si{\Omega}$, $R_6=710\;\si{\Omega}$, $R_7=240\;\si{\Omega}$, $R_8=200\;\si{\Omega}$\vspace{1em}
+\begin{center}
+\includegraphics[scale=0.75]{Zadani1.png}
+\end{center}
+\newpage
+\textbf{\large Řešení:}
+\vspace{-1.2em}
+\subsection{Zjednodušení zdrojů obvodu}\par
+\hspace{1em}\textbf{(1)} Seriové zapojení zdrojů $U_1, U_2$\par
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-83pt}
+\includegraphics[width=0.5\textwidth]{postup1.png}
+\vspace{-115pt}
+\end{wrapfigure}
+\vspace{70pt}\hspace{1em}$\mathbf{U_{12}}=U_1+U_2=105+85=\mathbf{190}\;\si{\volt}$\par\vspace{7,8em}
+\subsection{Zjednodušení odporů obvodu na ekvivalentní odpor $R_{ekv}$}\par
+\hspace{1em}\textbf{(1)} Transformace rezistorů $R_1, R_2, R_3$ trojúhelník $\rightarrow$ $R_A, R_B, R_A$ hvězda\par
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-5pt}
+\includegraphics[width=0.5\textwidth]{postup2.png}
+\vspace{-105pt}
+\end{wrapfigure}
+\vspace{10pt}\hspace{1em}$\mathbf{R_A}=\dfrac{R_1\cdot R_2}{R_1+R_2+R_3}=\dfrac{420\cdot 980}{420+980+330}=$\par\hspace{1em}$=\dfrac{41160}{173}\doteq \mathbf{ 237.9191 \;\si{\Omega}}$\par\hspace{1em}$\mathbf{R_B}=\dfrac{R_1\cdot R_3}{R_1+R_2+R_3}=\dfrac{420\cdot 330}{420+980+330}=$\par\hspace{1em}$=\dfrac{13860}{173}\doteq \mathbf{ 80.1156 \;\si{\Omega}}$\par\hspace{1em}$\mathbf{R_C}=\dfrac{R_2\cdot R_3}{R_1+R_2+R_3}=\dfrac{980\cdot 330}{420+980+330}=$\par\hspace{1em}$=\dfrac{32340}{173}\doteq \mathbf{ 186.9364 \;\si{\Omega}}$\par\vspace{1.5em}
+\hspace{1em}\textbf{(2)} Paralelní zapojení rezistorů $R_7, R_8$\par
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-47pt}
+\includegraphics[width=0.5\textwidth]{postup3.png}
+\vspace{-75pt}
+\end{wrapfigure}
+\vspace{28pt}\hspace{1em}
+$\mathbf{R_{78}}=\dfrac{R_7\cdot R_8}{R_7+R_8}=\dfrac{240\cdot 200}{240+200}=$\par\hspace{1em}$=\dfrac{1200}{11}\doteq \mathbf{ 109.0909 \;\si{\Omega}}$\newpage
+\hspace{1em}\textbf{(3)} Seriové zapojení rezistorů $R_B, R_4, R_5$ a $R_C, R_6$\par
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-27pt}
+\includegraphics[width=0.5\textwidth]{postup4.png}
+\vspace{-65pt}
+\end{wrapfigure}
+\vspace{3pt}
+\hspace{1em}$\mathbf{R_{B45}}=R_B+R_4+R_5=\dfrac{13860}{173}+280+$\par\hspace{1em}$+310=\dfrac{115930}{173}\doteq \mathbf{ 670.1156 \;\si{\Omega}}$\par\hspace{1em}$\mathbf{R_{C6}}=R_C+R_6=\dfrac{32340}{173}+710=$\par\hspace{1em}$=\dfrac{155170}{173}\doteq \mathbf{ 896.9364 \;\si{\Omega}}$\par\vspace{1.8em}
+\hspace{1em}\textbf{(4)} Paralelní zapojení rezistoru $R_{B45}, R_{C6}$\par
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-46pt}
+\includegraphics[width=0.5\textwidth]{postup5.png}
+\vspace{-65pt}
+\end{wrapfigure}
+\vspace{25pt}
+\hspace{1em}$\mathbf{R_{B45C6}}=\dfrac{R_{B45}\cdot R_{C6}}{R_{B45}+R_{C6}}=\dfrac{\dfrac{115930}{173}\cdot  \dfrac{155170}{173}}{\dfrac{115930}{173}+\dfrac{155170}{173}}=$\par\hspace{1em}$=\dfrac{179888581}{469003}\doteq \mathbf{ 383.5553 \;\si{\Omega}}$\par\vspace{2.9em}
+\hspace{1em}\textbf{(5)} Seriové zapojení rezistorů: $R_A, R_{B45C6}, R_{78}$\par
+\begin{wrapfigure}{l}{0.39\textwidth}
+\vspace{-40pt}
+\includegraphics[width=0.39\textwidth]{postup6.png}
+\vspace{-60pt}
+\end{wrapfigure}
+\vspace{25pt}
+\hspace{1em}$\mathbf{R_{ekv}}=R_{AB45C678}=R_A+R_{B45C6}+R_{78}=$\par\hspace{1em}$=\dfrac{41160}{173}+\dfrac{179888581}{469003}+\dfrac{1200}{11}\doteq \mathbf{ 730.5653 \;\si{\Omega}}$\par\vspace{2.6em}
+\subsection{Zpětný výpočet napětí $U_{R_5}$ a proudu $I_{R_5}$}\par
+\hspace{1em}\textbf{(1)} Výpočet proudů $I_{R_{ekv}}$ a $I_{R_{B45C6}}$\par
+\begin{wrapfigure}{l}{0.39\textwidth}
+\vspace{-40pt}
+\includegraphics[width=0.39\textwidth]{postup7.png}
+\vspace{-55pt}
+\end{wrapfigure}
+\vspace{20pt}
+\hspace{1em}$\mathbf{I_{R_{ekv}}}=\dfrac{U_{12}}{R_{ekv}}\doteq \dfrac{190}{730.5653}\doteq \mathbf{ 260.0726 \;\si{\milli\ampere}}$\par\hspace{1em}Pro proud ve větvi obvodu platí:\par\hspace{1em}$\mathbf{I_{R_{B45C6}}\equiv I_{R_{ekv}}}$\newpage
+\hspace{1em}\textbf{(2)} Výpočet napětí $U_{R_{B45C6}}$\par
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-20pt}
+\includegraphics[width=0.5\textwidth]{postup8.png}
+\vspace{-40pt}
+\end{wrapfigure}
+\vspace{10pt}
+\hspace{1em}$\mathbf{U_{R_{B45C6}}}=I_{R_{B45C6}}\cdot R_{B45C6}\doteq$\par\hspace{1em}$\doteq 0.2600726\cdot \dfrac{179888581}{469003}=$\par\hspace{1em}$\doteq \mathbf{ 99.7522 \;\si{\volt}}$\par\vspace{1.8em}
+\hspace{1em}\textbf{(3)} Určení napětí $U_{R_{B45}}$\par
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-67pt}
+\includegraphics[width=0.5\textwidth]{postup9.png}
+\vspace{-45pt}
+\end{wrapfigure}
+\vspace{55pt}
+\hspace{1em}Pro paralelní zapojení platí:\par\hspace{1em}$\mathbf{U_{R_{B45}}\equiv U_{R_{B45C6}}}$\par\vspace{3.4em}
+\hspace{1em}\textbf{(4)} Výpočet proudu $I_{R_{B45}}$\par
+\begin{wrapfigure}{l}{0.5\textwidth}
+\vspace{-55pt}
+\includegraphics[width=0.5\textwidth]{postup10.png}
+\vspace{-55pt}
+\end{wrapfigure}
+\vspace{40pt}
+\hspace{1em}$\mathbf{I_{R_{B45}}}=\dfrac {U_{R_{B45}}}{R_{B45}}\doteq \dfrac{99.7522}{670.1156}\doteq $\par\hspace{1em}$\doteq \mathbf{ 148.8581 \;\si{\milli\ampere}}$\par\vspace{3.7em}
+\hspace{1em}\textbf{(5)} Určení proudu $I_{R_{5}}$\par
+\begin{wrapfigure}{l}{0.55\textwidth}
+\vspace{-77pt}
+\includegraphics[width=0.55\textwidth]{postup11.png}
+\vspace{-60pt}
+\end{wrapfigure}
+\vspace{65pt}
+\hspace{1em}Pro proud ve větvi obvodu platí:\par\hspace{1em}$\mathbf{I_{R_{5}}\equiv I_{R_{B45}}}$\newpage
+\hspace{1em}\textbf{(5)} Výpočet napětí $U_{R5}$\par
+\begin{wrapfigure}{l}{0.55\textwidth}
+\vspace{-67pt}
+\includegraphics[width=0.55\textwidth]{postup12.png}
+\vspace{-65pt}
+\end{wrapfigure}
+\vspace{55pt}
+$\mathbf{U_{R_5}}=I_{R_{5}}\cdot R_{5}\doteq 0.1488581\cdot 310\doteq$\par$\doteq \mathbf{ 46.1460 \;\si{\volt}}$\par\vspace{3.8em}
+\subsection{Závěr}
+Napětí na rezistoru $R_5$ je $\mathbf{46.1460 \;\si{\volt}}$  a rezistorem protéká proud $\mathbf{148.8581 \;\si{\milli\ampere}}$.\newpage
+\section{Příklad č. 2: zadání D}
+Stanovte napětí $U_{R_6}$ a proud $I_{R_6}$. Použijte metodu Théveninovy věty.\par\vspace{1.5em}
+$U=150\;\si{\volt}$, $R_1=200\;\si{\Omega}$, $R_2=200\;\si{\Omega}$, $R_3=660\;\si{\Omega}$, $R_4=200\;\si{\Omega}$, $R_5=550\;\si{\Omega}$, $R_6=400\;\si{\Omega}$\vspace{1.5em}
+\begin{center}
+\includegraphics[scale=0.85]{Zadani2.png}
+\end{center}\par\vspace{1em}
+Alternativní nákres obvodu pro úsporu místa.\par
+\begin{center}
+\includegraphics[scale=0.88]{Zadani2upravene.png}
+\end{center}\par
+\newpage
+\textbf{\large Řešení:}
+\vspace{-1,2em}
+\subsection{Úprava obvodu pro další výpočty}
+\hspace{1em}\textbf{(1)} Překreslení původního obvodu bez odporu $R_6$\par\vspace{0.7em}
+\includegraphics[width=0.55\textwidth]{postup21.png}\par\vspace{1.7em}
+\hspace{1em}\textbf{(2)} Nahrazení napěťového zdroje $U_1$ zkratem\par\vspace{0.7em}
+\hspace{2em}\includegraphics[width=0.48\textwidth]{postup22.png}\par\vspace{0.4em}
+\subsection{Výpočet odporu $R_i$ mezi body $A$ a $B$}\par
+\hspace{1em}\textbf{(1)} Sériové zapojení odporů $R_1$ a $R_2$\par\vspace{0.8em}
+\begin{wrapfigure}{l}{0.42\textwidth}
+\vspace{-60pt}
+\includegraphics[width=0.42\textwidth]{postup23.png}
+\vspace{-70pt}
+\end{wrapfigure}
+\vspace{43pt}
+\hspace{1em}$\mathbf{R_{12}}=R_1+R_2=200+200=\mathbf{400 \;\si{\Omega}}$\par\vspace{5.5em}
+\hspace{1em}\textbf{(2)} Paralelní zapojení odporů $R_{12}$ a $R_3$\par\vspace{0.8em}
+\begin{wrapfigure}{l}{0.36\textwidth}
+\vspace{-52pt}
+\includegraphics[width=0.36\textwidth]{postup233.png}
+\vspace{-75pt}
+\end{wrapfigure}
+\vspace{33pt}
+\hspace{1em}$\mathbf{R_{123}}=\dfrac{R_{12}\cdot R_3}{R_{12}+R_3}=\dfrac{400\cdot 660}{400+660}=\dfrac{13200}{53}\doteq$\par\hspace{1em}$\doteq \mathbf{ 249,0566 \;\si{\Omega}}$\newpage
+\hspace{1em}\textbf{(3)} Sériové zapojení odporů $R_{123}$ a $R_4$\par\vspace{0.8em}
+\begin{wrapfigure}{l}{0.34\textwidth}
+\vspace{-48pt}
+\includegraphics[width=0.34\textwidth]{postup24.png}
+\vspace{-75pt}
+\end{wrapfigure}
+\vspace{28pt}
+\hspace{1em}$\mathbf{R_{1234}}=R_{123}+R_4=\dfrac{13200}{53}+200=\dfrac{23800}{53}\doteq$\par\hspace{1em}$\doteq \mathbf{ 449,0566 \;\si{\Omega}}$\par\vspace{5.2em}
+\hspace{1em}\textbf{(4)} Paralelní zapojení odporů $R_{1234}$ a $R_5$\par\vspace{0.8em}
+\begin{wrapfigure}{l}{0.14\textwidth}
+\vspace{-55pt}
+\includegraphics[width=0.14\textwidth]{postup26.png}
+\vspace{-80pt}
+\end{wrapfigure}
+\vspace{20pt}
+\hspace{1em}$\mathbf{R_i}=R_{12345}=\dfrac{R_{1234}\cdot R_5}{R_{1234}+R_5}=\dfrac{\dfrac{23800}{53}\cdot 550}{\dfrac{23800}{53}+550}=\dfrac{261800}{1059}\doteq \mathbf{ 247.2144 \;\si{\Omega}}$\par\vspace{3.5em}
+\subsection{Výpočet napětí naprázdno mezi body $A$ a $B$}\par
+\hspace{1em}\textbf{(1)} Určíme smyčkové proudy $I_1$ a $I_2$\par\vspace{0.8em}
+\includegraphics[width=0.55\textwidth]{postup27.png}\par\vspace{1.5em}
+\hspace{1em}\textbf{(2)} Rovnice pro první smyčku\par
+$R_1\cdot I_1+R_3\cdot (I_1-I_2)+R_2\cdot I_1=U$\par\vspace{0.8em}
+\hspace{1em}\textbf{(3)} Rovnice pro druhou smyčku\par
+$R_4\cdot I_2+R_5\cdot I_2-R_3\cdot (I_1-I_2)=0$\newpage
+\hspace{1em}\textbf{(4)} Výpočet proudu $I_2$ Gaussovou eliminační metodou\par
+$R_1\cdot I_1+R_3\cdot (I_1-I_2)+R_2\cdot I_1=U$\par
+$R_4\cdot I_2+R_5\cdot I_2-R_3\cdot (I_1-I_2)=0$\par
+\vspace{-8pt}\noindent\rule{7cm}{0.5pt}\par
+\hspace{1em}$(R_{12}+R_3)\cdot I_1-R_3\cdot I_2=U$\par
+\hspace{1em}$(R_4+R_5+R_3)\cdot I_2-R_3\cdot (I_1)=0$\par
+\vspace{-8pt}\hspace{1em}\noindent\rule{7cm}{0.5pt}\par
+\hspace{2em}$(200+200+660)\cdot I_1-660I_2=150$\par
+\hspace{2em}$-660I_1+(200+550+660)I_2=0$\par
+\vspace{-8pt}\hspace{2em}\noindent\rule{7cm}{0.5pt}\par
+\hspace{3em}$1060I_1-660I_2=150$\hspace{1.5em}$\backslash\cdot 660$\par
+\hspace{3em}$-660I_1+1410I_2=0$\hspace{1.5em}$\backslash\cdot 1060$\par
+\vspace{-8pt}\hspace{3em}\noindent\rule{7cm}{0.5pt}\par
+\hspace{4em}$-435600I_2=99000$\par
+\hspace{4em}$1494600I_2=0$\par
+\vspace{-8pt}\hspace{4em}\noindent\rule{7cm}{0.5pt}\par
+\hspace{5em}$1059000I_2=99000$\par
+\vspace{-8pt}\hspace{5em}\noindent\rule{7cm}{0.5pt}\par
+\hspace{6em}$\mathbf{I_2}=\dfrac{99000}{1059000}=\dfrac{99}{1059}\doteq \mathbf{ 934.8441 \;\si{\milli\ampere}}$\par\vspace{1em}
+\hspace{1em}\textbf{(5)} Výpočet napětí $U_{R_5}$\par\vspace{0.8em}
+\begin{wrapfigure}{l}{0.55\textwidth}
+\vspace{-50pt}
+\includegraphics[width=0.55\textwidth]{postup28.png}
+\vspace{-80pt}
+\end{wrapfigure}
+\vspace{25pt}
+\hspace{1em}$\mathbf{U_{R_5}}=I_2\cdot R_5=\dfrac{99}{1059}\cdot 550=$\par
+\hspace{1em}$=\dfrac{18500}{353}\doteq \mathbf{ 51.4164 \;\si{\volt}}$\par\vspace{4em}
+\hspace{1em}\textbf{(6)} Určení napětí $U_i$\par\vspace{0.8em}
+\begin{wrapfigure}{l}{0.55\textwidth}
+\vspace{-56pt}
+\includegraphics[width=0.55\textwidth]{postup29.png}
+\vspace{-75pt}
+\end{wrapfigure}
+\vspace{25pt}
+\hspace{1em}Pro paralelní zapojení platí:\par
+\hspace{1em}$U_i\equiv U_{R_5}$\par
+\hspace{1em}$\mathbf{U_i\doteq 51.4164\;\si{\volt}}$\newpage
+\subsection{Výpočet proudu $I_{R_6}$ a napětí $U_{R_6}$}
+\hspace{1em}\textbf{(6)} Výpočet proudu $I_{R_6}$\par\vspace{0.8em}
+\begin{wrapfigure}{l}{0.33\textwidth}
+\vspace{-60pt}
+\includegraphics[width=0.33\textwidth]{postup221.png}
+\vspace{-75pt}
+\end{wrapfigure}
+\vspace{25pt}
+\hspace{1em}$\mathbf{I_{R_6}}=\dfrac{U_i}{R_i+R_6}=\dfrac{\dfrac{18150}{353}}{\dfrac{261800}{1059}}=\dfrac{1089}{13708}\doteq \mathbf{ 79.4427 \;\si{\milli\ampere}}$\par\vspace{4em}
+\hspace{1em}\textbf{(7)} Výpočet napětí $U_{R_6}$\par\vspace{0.8em}
+\begin{wrapfigure}{l}{0.35\textwidth}
+\vspace{-50pt}
+\includegraphics[width=0.35\textwidth]{postup222.png}
+\vspace{-75pt}
+\end{wrapfigure}
+\vspace{30pt}
+\hspace{1em}$\mathbf{U_{R_6}}=R_6\cdot I_{R_6}=\dfrac{1089}{13708}\doteq \mathbf{ 31.7771 \;\si{\volt}}$\par\vspace{4.8em}
+\subsection{Závěr}\par
+Napětí na rezistoru $R_6$ je $\mathbf{31.7771 \;\si{\volt}}$  a rezistorem protéká proud $\mathbf{79.4427 \;\si{\milli\ampere}}$.\newpage
+\section{Příklad č. 3: zadání G}
+Stanovte napětí $U_{R4}$ a proud $I_{R4}$. Použijte metodu uzlových napětí $(U_A, U_B, U_C)$.\par\vspace{1.5em}
+$U=160\;\si{\volt}$, $I_1=0.65\;\si{\ampere}$, $I_2=0.45\;\si{\ampere}$, $R_1=46\;\si{\Omega}$, $R_2=41\;\si{\Omega}$, $R_3=53\;\si{\Omega}$, $R_4=33\;\si{\Omega}$, $R_5=29\;\si{\Omega}$\vspace{1em}
+\begin{center}
+\includegraphics[scale=1]{Zadani3.png}
+\end{center}\par\vspace{1em}
+\newpage
+\textbf{\large Řešení:}
+\vspace{-1.2em}
+\subsection{Převod odporů na vodivost}\par
+$G_1=\dfrac{1}{46}\;\si{\siemens}$\hspace{2em}$G_2=\dfrac{1}{41}\;\si{\siemens}$\hspace{2em}$G_3=\dfrac{1}{53}\;\si{\siemens}$\hspace{2em}$G_4=\dfrac{1}{33}\;\si{\siemens}$\hspace{2em}$G_5=\dfrac{1}{29}\;\si{\siemens}$\par\vspace{-0.2em}
+\subsection{Výpočet proudů v důležitých uzlech podle 1. Kirchhoffova zákona}\par
+\begin{wrapfigure}{l}{0.55\textwidth}
+\vspace{-32pt}
+\includegraphics[width=0.55\textwidth]{postup31.png}
+\vspace{-100pt}
+\end{wrapfigure}
+\vspace{20pt}
+\hspace{1em}\textbf{(1)} Součet proudů v uzlu $A$\par
+\hspace{1em}$I_1-I_{R_1}-I_{R_2}=0$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Součet proudů v uzlu $B$\par
+\hspace{1em}$I_{R_2}+I_{R_5}-I_{R_4}=0$\par\vspace{1em}
+\hspace{1em}\textbf{(3)} Součet proudů v uzlu $A$\par
+\hspace{1em}$I_2+I_{R_4}-I_{R_5}-I_{R_3}=0$\par\vspace{1.6em}
+\subsection{Určení proudů $I_{R_1}$, $I_{R_2}$, $I_{R_3}$, $I_{R_4}$, $I_{R_5}$ pomocí náhradních obvodů}
+\hspace{1em}\textbf{(1)} Proud $I_{R_1}$\par
+\begin{wrapfigure}{l}{0.19\textwidth}
+\vspace{-70pt}
+\includegraphics[width=0.19\textwidth]{postup32.png}
+\vspace{-95pt}
+\end{wrapfigure}
+\vspace{60pt}
+\hspace{2.15em}$I_{R_1}=G_1\cdot U_A$\par\vspace{7.8em}
+\hspace{1em}\textbf{(2)} Proud $I_{R_2}$\par
+\begin{wrapfigure}{l}{0.23\textwidth}
+\vspace{-65pt}
+\includegraphics[width=0.23\textwidth]{postup33.png}
+\vspace{-75pt}
+\end{wrapfigure}
+\vspace{50pt}
+\hspace{1em}$I_{R_2}=G_2\cdot U_{R_2}=G_2\cdot (U_A-U_B)$\newpage
+\hspace{1em}\textbf{(3)} Proud $I_{R_3}$\par
+\begin{wrapfigure}{l}{0.235\textwidth}
+\vspace{-45pt}
+\includegraphics[width=0.235\textwidth]{postup34.png}
+\vspace{-60pt}
+\end{wrapfigure}
+\vspace{30pt}
+\hspace{1em}$I_{R_3}=G_3\cdot U_C$\par\vspace{4em}
+\hspace{1em}\textbf{(4)} Proud $I_{R_4}$\par
+\begin{wrapfigure}{l}{0.28\textwidth}
+\vspace{-58pt}
+\includegraphics[width=0.28\textwidth]{postup35.png}
+\vspace{-75pt}
+\end{wrapfigure}
+\vspace{56pt}
+$I_{R_4}=G_4\cdot U_{R_4}=G_4\cdot (U_B-U_C)$\par\vspace{6em}
+\hspace{1em}\textbf{(5)} Proud $I_{R_5}$\par
+\begin{wrapfigure}{l}{0.38\textwidth}
+\vspace{-88pt}
+\includegraphics[width=0.38\textwidth]{postup36.png}
+\vspace{-78pt}
+\end{wrapfigure}
+\vspace{80pt}
+\hspace{1em}$I_{R_5}=G_5\cdot U_{R_5}=G_5\cdot (U_C-U_B+U)$\par\vspace{4.8em}
+\subsection{Výpočet napětí $U_A$, $U_B$, $U_C$}
+\hspace{1em}\textbf{(1)} Dosazení do rovnic součtů proudů v důležitých uzlech\par
+$I_1-G_1\cdot U_A-G_2\cdot (U_A-U_B)=0$\par
+$G_2\cdot (U_A-U_B)+G_5\cdot (U_C-U_B+U)-G_4\cdot (U_B-U_C)=0$\par
+$I_2+G_4\cdot (U_B-U_C)-G_5\cdot (U_C-U_B+U)-G_3\cdot U_C=0$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Úprava rovnic\par
+$(-G_1-G_2)\cdot U_A+G_2\cdot U_B+0\cdot U_C=-I_1$\par
+$G_2\cdot U_A+(-G_2-G_5-G_4)\cdot U_B+(-G_2-G_5-G_4)\cdot U_C=-G_5\cdot U$\par
+$0\cdot U_A+(G_4+G_5)\cdot U_B+(-G_4-G_5-G_3)\cdot U_C=G_5\cdot U-I_2$\newpage
+\hspace{1em}\textbf{(3)} Sestavení a výpočet determinantů pomocí Sarrusova pravidla\par
+$\mathbf{A}=\begin{vmatrix}
+-G_1-G_2 & G_2 & 0 \vspace{1em}\\
+G_2 & -G_2-G_5-G_4 & G_4+G_5 \vspace{1em}\\
+0 & G_4+G_5 & -G_4-G_5-G_3
+\end{vmatrix}
+=\begin{vmatrix}
+-\dfrac{87}{1886} & \dfrac{1}{41} & 0 \vspace{1em}\\
+\dfrac{1}{41} & -\dfrac{3499}{39237} & \dfrac{62}{957} \vspace{1em}\\
+0 & \dfrac{62}{957} & -\dfrac{4243}{50721}
+\end{vmatrix}\doteq$\par\vspace{0.5em}\hspace{12pt}$\doteq -3.4412\cdot10^{-4}+1.9361\cdot 10^{-4}+0.4976\cdot 10^{-4}\doteq \mathbf{-1.0074\cdot 10^{-4}}$\par\vspace{2em}
+$\mathbf{A_{U_A}}=\begin{vmatrix}
+-I_1 & G_2 & 0 \vspace{1em}\\
+-G_5U & -G_2-G_5-G_4 & G_4+G_5 \vspace{1em}\\
+G_5U-I_2 & G_4+G_5 & -G_4-G_5-G_3
+\end{vmatrix}
+=\begin{vmatrix}
+-0.65 & \dfrac{1}{41} & 0 \vspace{1em}\\
+-\dfrac{160}{29} & -\dfrac{3499}{39237} & \dfrac{62}{957} \vspace{1em}\\
+\dfrac{2939}{580} & \dfrac{62}{957} & -\dfrac{4243}{50721}
+\end{vmatrix}\doteq$\par\vspace{0.5em}\hspace{25.5pt}$\doteq -4.8489\cdot10^{-3}+8.0070\cdot 10^{-3}+2.7282\cdot 10^{-3}-11.2570\cdot 10^{-3}\doteq \mathbf{-5.3708\cdot 10^{-3}}$\par\vspace{2em}
+$\mathbf{A_{U_B}}=\begin{vmatrix}
+-G_1-G_2 & -I_1 & 0 \vspace{1em}\\
+G_2 & -G_5U & G_4+G_5 \vspace{1em}\\
+0 & G_5U-I_2 & -G_4-G_5-G_3
+\end{vmatrix}
+=\begin{vmatrix}
+-\dfrac{87}{1886} & -0.65 & 0 \vspace{1em}\\
+\dfrac{1}{41} & -\dfrac{160}{29} & \dfrac{62}{957} \vspace{1em}\\
+0 & \dfrac{2939}{580} & -\dfrac{4243}{50721}
+\end{vmatrix}\doteq$\par\vspace{0.5em}\hspace{25.5pt}$\doteq -21,2904\cdot10^{-3}+15,1436\cdot 10^{-3}-1,3262\cdot 10^{-3}\doteq \mathbf{-7,473\cdot 10^{-3}}$\par\vspace{2em}
+$\mathbf{A_{U_C}}=\begin{vmatrix}
+-G_1-G_2 & G_2 & -I_1 \vspace{1em}\\
+G_2 & -G_2-G_5-G_4 & -G_5U \vspace{1em}\\
+0 & G_4+G_5 & G_5U-I_2
+\end{vmatrix}
+=\begin{vmatrix}
+-\dfrac{87}{1886} & \dfrac{1}{41} & -0.65 \vspace{1em}\\
+\dfrac{1}{41} & -\dfrac{3499}{39237} & -\dfrac{160}{29} \vspace{1em}\\
+0 & \dfrac{62}{957} & \dfrac{2939}{580}
+\end{vmatrix}\doteq$\par\vspace{0.5em}\hspace{25.5pt}$\doteq 20.8448\cdot10^{-3}-1.0271\cdot 10^{-3}-16.4884\cdot 10^{-3}-3.0144\cdot 10^{-3}\doteq \mathbf{0.3148\cdot 10^{-3}}$\newpage
+\hspace{1em}\textbf{(4)} Výpočet napětí $U_A$, $U_B$, $U_C$ pomocí Cramerova pravidla\par
+$\mathbf{U_A}=\dfrac{A_{U_A}}{A}=\dfrac{-5.3708\cdot 10^{-3}}{-1.0074\cdot 10^{-4}}=\mathbf{53.3124\;\si{\volt}}$\par\vspace{1em}
+$\mathbf{U_B}=\dfrac{A_{U_B}}{A}=\dfrac{-7.4730\cdot 10^{-3}}{-1.0074\cdot 10^{-4}}=\mathbf{74.1800\;\si{\volt}}$\par\vspace{1em}
+$\mathbf{U_C}=\dfrac{A_{U_C}}{A}=\dfrac{0.3148\cdot 10^{-3}}{-1.0074\cdot 10^{-4}}=\mathbf{-3.1252\;\si{\volt}}$\par\vspace{0.8em}
+\subsection{Výpočet napětí $U_{R_4}$ a proudu $I_{R_4}$}
+\hspace{1em}\textbf{(4)} Výpočet napětí $U_{R_4}$\par
+$\mathbf{U_{R_4}}=U_B-U_C\doteq 74.1800-(-3.1252)\doteq \mathbf{ 77.3052\;\si{\volt}}$\par\vspace{0.8em}
+\hspace{1em}\textbf{(5)} Výpočet proudu $I_{R_4}$\par
+$\mathbf{I_{R_4}}=G_4\cdot U_{R_4}\doteq \dfrac{1}{33}\cdot 77.3052\doteq \mathbf{ 2.3426\;\si{\ampere}}$\par\vspace{0.8em}
+\subsection{Závěr}
+Napětí na rezistoru $R_4$ je $\mathbf{77,3052 \;\si{\volt}}$  a rezistorem protéká proud $\mathbf{2,3426 \;\si{\ampere}}$.\newpage
+\section{Příklad č. 4: zadání D}
+Pro napájecí napětí platí: $u_1 = U_1 \cdot \sin (2\pi ft)$, $u_2 = U_2 \cdot \sin (2\pi ft)$. Ve vztahu pro napětí   určete $u_{C_2} = U_{C_2} \cdot \sin (2\pi ft+\varphi_{C_2})$ určete $| U_{C_2}|$ a $\varphi_{C_2}$. Použijte metodu smyčkových proudů.\\
+\\
+Pozn: Pomocné směry šipek napájecích zdrojů platí pro speciální časový okamžik $(t=\dfrac{\pi}
+{2\omega})$.\\
+\\
+$U_1=45\;\si{\volt}$, $U_2=50\;\si{\volt}$, $R_1=13\;\si{\Omega}$, $R_2=15\;\si{\Omega}$, $L_1=180\;\si{\milli\henry}$, $L_2=90\;\si{\milli\henry}$, $C_1=75\;\si{\micro\farad}$, $C_2=210\;\si{\micro\farad}$, $f=85\;\si{\hertz}$\par
+\vspace{1.5em}
+\begin{center}
+\includegraphics[width=0.56\textwidth]{zadani4.png}
+\vspace{-75pt}
+\end{center}
+\newpage
+\textbf{\large Řešení:}
+\vspace{-1.2em}
+\subsection{Vhodné určení proudových smyček}\par
+\begin{center}
+\includegraphics[width=0.56\textwidth]{postup41.png}
+\end{center}
+Více smyček není pro výpočet nutné určovat.\par
+\subsection{Výpočet napětí na zdrojích $u_1$ a $u_2$ pro čas $t=\dfrac{\pi}{2\omega}$}\par
+$\mathbf{u_1} = U_1 \cdot \sin (2\pi ft)=U_1 \cdot \sin (2\pi f\dfrac{\pi}{4\pi f})=U_1 \cdot \sin (\dfrac{\pi}{2})=U_1=\mathbf{45}\;\si{\volt}$\par
+$\mathbf{u_2} = U_2 \cdot \sin (2\pi ft)=U_2 \cdot \sin (2\pi f\dfrac{\pi}{4\pi f})=U_2 \cdot \sin (\dfrac{\pi}{2})=U_2=\mathbf{50}\;\si{\volt}$\par
+\subsection{Výpočet impedancí na kondenzátoru a cívkách}\par
+\hspace{1em}\textbf{(1)} Impedance kondenzátoru $C_2$\par
+$\mathbf{Z_{C_2}}=\dfrac{-j}{\omega\cdot C_2}=\dfrac{-j}{2\cdot \pi\cdot f\cdot C_2}=\dfrac{-j}{2\cdot \pi\cdot 85\cdot 75\cdot 10^{-6}}\doteq \mathbf{-24.9655j\;\si{\Omega}}$\par\vspace{1em}
+%$Z_{C_2}=\dfrac{-j}{2\cdot \pi\cdot f\cdot C_2}$\par
+%$Z_{C_2}=\dfrac{-j}{2\cdot \pi\cdot 85\cdot 75\cdot 10^{-6}}$\par
+%$Z_{C_2}\doteq -24.9655j\;\si{\Omega}$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Impedance cívky $L_1$\par
+$\mathbf{Z_{L_1}}=j\cdot\omega\cdot L_1=j\cdot2\cdot\pi\cdot f\cdot L_1=(2\cdot\pi\cdot 85\cdot 180) j\doteq \mathbf{96.1327j\;\si{\Omega}}$\par\vspace{1em}
+%$Z_{L_1}=j\cdot2\cdot\pi\cdot f\cdot L_1$\par
+%$Z_{L_1}=j\cdot 2\cdot\pi\cdot 85\cdot 180$\par
+%$Z_{L_1}\doteq 96.1327j\;\si{\Omega}$\newpage
+\hspace{1em}\textbf{(3)} Impedance cívky $L_2$\par
+$\mathbf{Z_{L_1}}=j\cdot\omega\cdot L_2=j\cdot2\cdot\pi\cdot f\cdot L_2=(2\cdot\pi\cdot 85\cdot 90)j\doteq \mathbf{48.0664j\;\si{\Omega}}$\par
+%$Z_{L_1}=j\cdot2\cdot\pi\cdot f\cdot L_2$\par
+%$Z_{L_1}=j\cdot 2\cdot\pi\cdot 85\cdot 90$\par
+%$Z_{L_1}\doteq 48.0664j\;\si{\Omega}$\par
+\subsection{Určení napětí na prvcích v jednotlivých smyčkách podle 2. Kirchhoffova zákona}\par
+\hspace{1em}\textbf{(1)} Rovnice pro první smyčku\par
+$Z_{C_2}\cdot (I_A+I_B)+Z_{L_1}\cdot I_A=u_1$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Rovnice pro druhou smyčku\par
+$Z_{C_2}\cdot (I_A+I_B)+R_2\cdot I_B+Z_{L_2}\cdot I_B=u_2$\par\vspace{1em}
+\hspace{1em}\textbf{(3)} Úprava soustavy rovnic\par
+$(Z_{C_2}+Z_{L_1})\cdot I_A + Z_{C_2}\cdot I_B=u_1$\par
+$Z_{C_2}\cdot I_A + (Z_{C_2}+R_2+Z_{L_2})=u_2$\par
+\subsection{Výpočet proudů $I_A$ a $I_B$}\par
+\hspace{1em}\textbf{(1)} Dosazení\par
+$(-24.9655j+96.1327j)\cdot I_A -24.9655j\cdot I_B=45$\par
+$-24.9655\cdot I_A+(-24.9655j+15+48.0664j)=50$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Výpočet soustavy rovnic Gaussovou eliminační metodou\par
+\(
+\left(
+	\begin{array}{cc|c}
+	71.1673j & -24.9655j & 45 \\
+    -24.9655j & 15+23.1009j & 50 \\
+	\end{array}
+\right)
+\sim\)\par
+\(\sim\left(
+	\begin{array}{cc|c}
+	1 & -0.3508 & -0.6323j \\
+    -24.9655j & 15+23.1009j & 50 \\
+	\end{array}
+\right)
+	\begin {array}{c}
+	\RN{1}/71.1673j \\
+	\\
+	\end{array}\sim\)
+\par
+\(\sim\left(
+	\begin{array}{cc|c}
+	1 & -0.3508 & -0.6323j \\
+    0 & 15+14.3430j & 65.7860 \\
+	\end{array}
+\right)	
+\begin {array}{c}
+	\\	
+	\RN{2}+24.9655\cdot\RN{1} \\
+	\end{array}\sim\)\par
+\(\sim\left(
+	\begin{array}{cc|c}
+	1 & -0.3508 & -0.6323j \\
+    0 & 1 & 2.2910-2.1907j \\
+	\end{array}
+\right)
+\begin {array}{c}
+	\\	
+	\RN{2}/(15+14.3430j) \\
+	\end{array}
+\sim\)\par
+\(\sim\left(
+	\begin{array}{cc|c}
+	1 & 0 & 0.8037-1.4008j \\
+    0 & 1 & 2.2910-2.1907j \\
+	\end{array}
+\right)
+	\begin {array}{c}
+	\RN{1}+0.3508\cdot\RN{2} \\
+	\\
+	\end{array}\)\par\vspace{1em}
+	$\mathbf{I_A}=\mathbf{0.8037-1.4008j\;\si{\ampere}}$\par
+	$\mathbf{I_B}=\mathbf{2.2910-2.1907j\;\si{\ampere}}$\par
+\subsection{Výpočet proud $i_{C_2}$}\par
+%\hspace{1em}\textbf{(1)} Proud $I_{C_2}$\par
+$\mathbf{i_{C_2}}=I_A+I_B=0.8037+2.2910-1.4008i-2.1907j=\mathbf{3.0947-3.5915j\;\si{\ampere}}$\par
+%$i_{C_2}=0.8037+2.2910-1.4008i-2.1907i=3.0947-3.5915i\;\si{\ampere}$\par
+%$i_{C_2}=3.0947-3.5915i\;\si{\ampere}$\par\vspace{1em}
+%\hspace{1em}\textbf{(2)} Amplituda $|I_{C_2}|$\par
+%$|I_{C_2}|= \sqrt{Re(i_{C_2})^2+Im(i_{C_2})^2}=\sqrt{30947^2+3.5915^2}=4.7409\;\si{\ampere}$
+\subsection{Výpočet napětí  $u_{C_2}$, jeho amplitudy $|U_{C_2}|$ a fázového posunu $\varphi_{C_2}$}\par
+\hspace{1em}\textbf{(1)} Napětí $u_{C_2}$\par
+$\mathbf{u_{C_2}}=Z_{C_2}\cdot i_{c_2}=-24.9655j\cdot (3.0947-3.5915j)=\mathbf{-89.6628-77.2608j\;\si{\volt}}$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Amplituda napětí $|U_{C_2}|$\par
+$\mathbf{|U_{C_2}|}= \sqrt{Re(u_{C_2})^2+Im(u_{C_2})^2}=\sqrt{(-89.6628)^2+(-77.2608)^2}=\mathbf{118.3581\;\si{\volt}}$\par\vspace{1em}
+\hspace{1em}\textbf{(3)} Fázový posun $\varphi_{C_2}$\par
+%$\varphi_{C_2}=arctg\Big(\dfrac{Re(u_{C_2})}{Im(u_{C_2})}\Big)=arctg\Big(\dfrac{-89.6628}{-77.%2608}\Big)=arctg(1.1605)\doteq \mathbf{49.25\degree}$\par
+$\varphi_{C_2}=arctg\Big(\dfrac{Im(u_{C_2})}{Re(u_{C_2})}\Big)=arctg\Big(\dfrac{-77.2608}{-89.6628}\Big)=arctg(0.8617)\doteq \mathbf{40.7509\degree}$\par
+Protože hodnota napětí $u_{C_2}$ odpovídá 3. kvadrantu, který je mimo definiční obor funkce tangens, musíme k výsledku přičíst $180\degree$.\par
+$\varphi_{C_2}\doteq 40,7509+180\doteq \mathbf{220,7509\degree}$\par
+\subsection{Závěr}\par
+Amplituda napětí $u_{C_2}$ je rovna $\mathbf{118.3581 \;\si{\volt}}$, napětí má vůči zdrojům fázový posun $\mathbf{220,7509\degree}$.
+\newpage
+\section{Příklad č. 5: zadání D}
+V obvodu na obrázku níže v čase $t=0[s]$ sepne spínač $S$. Sestavte diferenciální rovnici popisující chování obvodu na obrázku, dále ji upravte dosazením hodnot parametrů. Vypočítejte analytické řešení $u_C=f(t)$. Proveďte kontrolu výpočtu dosazením do sestavené diferenciální rovnice.\par\vspace{1.5em}
+$U=25\;\si{\volt}$, $C=5\;\si{\farad}$, $R=25 \;\si{\Omega}$, $u_C(0)=12\;\si{\volt}$\vspace{1em}
+\begin{center}
+\includegraphics[scale=1]{Zadani5.png}
+\end{center}\par\vspace{1em}\par\vspace{1em}
+\newpage
+\textbf{\large Řešení:}\vspace{-1.2em}
+\subsection{Popis obvodu základními rovnicemi}
+\hspace{1em}\textbf{(1)} Rovnice popisující napětí v obvodu podle 2. Kirchhoffova zákona\par\vspace{0.5em}$u_R+u_C=U$\par\vspace{0.1em}
+\hspace{1em}\textbf{(2)} Úprava této rovnice podle Ohmova zákona a vyjádření proudu $i$\par\vspace{0.5em}
+$i\cdot R+u_C=U$\par
+$i=\dfrac{U-u_C}{R}$\par\vspace{1em}
+\hspace{1em}\textbf{(3)} Rovnice napětí na kondenzátoru $C$\par\vspace{0.5em}
+$u_C'=\dfrac{i}{C}$\par
+Axiom této rovnice: $u_{Cp}\equiv u_C(0)=12\;\si{\volt}$
+\subsection{Výpočet charakteristické rovnice pro napětí na kondenzátoru $C$}
+\hspace{1em}\textbf{(1)} Dosazením za proud $i$ z rovnice {\rom{5.}\rom{1}} (3) ($i=\dfrac{U-u_C}{R}$)\par\vspace{0.5em}
+$u_C'=\dfrac{U-u_C}{R\cdot C}$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Vytvoření charakteristické rovnice\par\vspace{0.5em}
+$u_C'=\dfrac{U}{R\cdot C}-\dfrac{u_C}{R\cdot C}$\par
+$u_C'+\dfrac{u_C}{R\cdot C}=\dfrac{U}{R\cdot C}$\par
+$u_C'+\dfrac{u_C}{R\cdot C}=\dfrac{25}{25\cdot 5}$\par
+$u_C'+\dfrac{u_C}{R\cdot C}=\dfrac{1}{5}$\par\vspace{1em}
+\hspace{1em}\textbf{(3)} Výpočet charakteristické rovnice\par\vspace{0.5em}
+$u_C' \Leftrightarrow \lambda$, $u_C\Leftrightarrow 1$\par
+$\lambda +\dfrac{1}{R\cdot C}=0$\par
+$\lambda =-\dfrac{1}{R\cdot C}$\newpage
+\subsection{Výpočet K(t) pomocí očekávaného řešení}
+\hspace{1em}\textbf{(1)} Očekávané řešení\par\vspace{0.2em}
+$u_C(t)=K(t)\cdot e^{\lambda\cdot t}$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Dosazení za $\lambda$ z rovnice \rom{5.}\rom{2} (3) ($\lambda =-\dfrac{1}{R\cdot C}$)\par\vspace{0.2em}
+$u_C(t)=K(t)\cdot e^{-\dfrac{t}{RC}}$\par\vspace{1em}
+\hspace{1em}\textbf{(3)} Derivace\par\vspace{0.2em}
+$u_C'(t)=K'(t)\cdot e^{-\dfrac{t}{RC}}+K(t)\cdot (-\dfrac{1}{RC})\cdot e^{-\dfrac{t}{RC}}$\par\vspace{1em}
+\hspace{1em}\textbf{(4)} Dosazení získaného $u_C$ a $u_C'$ do rovnice \rom{5.}\rom{2} (2) ($u_C'+\dfrac{u_C}{R\cdot C}=\dfrac{U}{R\cdot C}$), následná úprava\par\vspace{0.5em}
+$K'(t)\cdot e^{-\dfrac{t}{R\cdot C}}+K(t)\cdot (-\dfrac{1}{R\cdot C})\cdot e^{-\dfrac{t}{RC}}+\dfrac{K(t)\cdot e^{-\dfrac{t}{R\cdot C}}}{R\cdot C}=\dfrac{U}{R\cdot C}$\par
+$K'(t)\cdot e^{-\dfrac{t}{R\cdot C}}=\dfrac{U}{R\cdot C}$\par
+$K'(t)=\dfrac{U}{R\cdot C\cdot e^{-\dfrac{t}{R\cdot C}}}$\par
+$K'(t)=\dfrac{U\cdot e^{\dfrac{t}{R\cdot C}}}{R\cdot C}$\par\vspace{1em}
+\hspace{1em}\textbf{(5)} Integrace\par\vspace{0.2em}
+$\int K'(t)=\int \dfrac{U\cdot e^{\dfrac{t}{R\cdot C}}}{R\cdot C}$\par
+$K(t)=\dfrac{U}{R\cdot C}\cdot \int e^{\dfrac{t}{R\cdot C}}$\par
+$K(t)=\dfrac{U}{R\cdot C}\cdot R\cdot C\cdot e^{\dfrac{t}{R\cdot C}}+k$\par
+$K(t)=U\cdot e^{\dfrac{t}{R\cdot C}}+k$\newpage
+\subsection{Výpočet integrační konstanty $k$ pomocí počáteční podmínky $u_{Cp}$}
+\hspace{1em}\textbf{(1)} Dosazení $K(t)$ z \rom{5.}\rom{5} (5) ($K(t)=U\cdot e^{\dfrac{t}{R\cdot C}}+k$) do upravené funkce očekávaného řešení \rom{5.}\rom{3} (2) ($u_C(t)=K(t)\cdot e^{-\dfrac{t}{RC}}$), následná úprava\par\vspace{0.5em}
+$u_C(t)=(U\cdot e^{\dfrac{t}{R\cdot C}}+k)\cdot e^{-\dfrac{t}{R\cdot C}}$\par
+$u_C(t)=U+k\cdot e^{-\dfrac{t}{R\cdot C}}$\par\vspace{1em}
+\hspace{1em}\textbf{(2)} Řešení získané funkce v čase $t=0$ dosazením počáteční podmínky $u_{Cp}$\par\vspace{0.2em}
+$u_C(0)=U+k\cdot e^{-\dfrac{0}{R\cdot C}}$\par
+$u_{Cp}=U+k\cdot e^{-\dfrac{0}{R\cdot C}}$\par
+$u_{Cp}=U+k$\par
+$k=u_{Cp}-U$\par
+$k=12-25$\par
+$k=-13$\par\vspace{0.3em}
+\subsection{Výsledná funkce $u_C(t)$}
+$u_C(t)=U+k\cdot e^{-\dfrac{t}{R\cdot C}}$\par
+$u_C(t)=25-13\cdot e^{-\dfrac{t}{125}}$\par\vspace{1.5em}
+\subsection{Zkouška}
+\hspace{1em}\textbf{(1)} Pro $t=0$\par\vspace{0.2em}
+$u_C(0)=25-13\cdot e^{-\dfrac{0}{R\cdot C}}$\par
+$u_C(0)=25-13\cdot 1$\par
+$u_C(0)=12V$\par
+$u_C(0)\equiv u_{Cp}$ $\Rightarrow$ (1) platí\newpage
+\hspace{1em}\textbf{(2)} Pro $t\rightarrow \infinity$\par\vspace{0.2em}
+$u_C(\rightarrow \infinity)=25-13\cdot e^{-\displaystyle{\lim_{t \to \infty}}(\dfrac{t}{R\cdot C})}$\par
+$u_C(\rightarrow \infinity)=25-13\cdot e\cdot 0$\par
+$u_C(\rightarrow \infinity)=25\;\si{\volt}$\par
+$u_C(\rightarrow \infinity)\equiv U$ $\Rightarrow$ (2) platí\par\vspace{1em}
+\hspace{1em}\textbf{(4)} Vyjádření $u_C'$ pomocí původní rovnice z \rom{5.}\rom{2} (2) ($u_C'+\dfrac{u_C}{R\cdot C}=\dfrac{1}{5}$)\par\vspace{0.2em}
+$u_C'+\dfrac{25-13\cdot e^{-\dfrac{t}{125}}}{R\cdot C}=\dfrac{1}{5}$\par
+$u_C'=\dfrac{1}{5}-\dfrac{25-13\cdot e^{-\dfrac{t}{125}}}{R\cdot C}$\par
+$u_C'=\dfrac{1}{5}-\dfrac{25-13\cdot e^{-\dfrac{t}{125}}}{125}$\par\vspace{1em}
+\hspace{1em}\textbf{(5)} Dosazení $u_C$ a $u_C'$ do původní rovnice z \rom{5.}\rom{2} (2) ($u_C'+\dfrac{u_C}{R\cdot C}=\dfrac{1}{5}$)\par\vspace{0.5em}
+$\dfrac{1}{5}-\dfrac{25-13\cdot e^{-\dfrac{t}{125}}}{125}+\dfrac{25-13\cdot e^{-\dfrac{t}{125}}}{125}=\dfrac{1}{5}$\par
+$\dfrac{1}{5}=\dfrac{1}{5}$ $\Rightarrow$ platí\par\vspace{1.5em}
+\subsection{Závěr}\vspace{-1em}
+Napětí na kondenzátoru $C$ popisuje funkce $\mathbf{u_C(t)=25-13\cdot e^{-\dfrac{t}{125}}}$, kde $t$ je čas po sepnutí spínače.\newpage
+\section{Tabulka řešení.}\par
+\begin{center}
+{\renewcommand{\arraystretch}{2.5}%
+	\begin{tabular}{|c|c|c|} \hline 
+        \textbf{Příklad} & \textbf{Skupina} & \textbf{Výsledky} \\ \hline
+        1 & D & \hspace{1em}$U_{R5} = 46.1460\;\si{\volt}$ \qquad \qquad $I_{R5} = 148.8581 \;\si{\milli\ampere}$\hspace{1em} \\ \hline
+        2 & D & $U_{R6} = 31.7771\;\si{\volt}$ \qquad \qquad $I_{R6} = 79.4427 \;\si{\milli\ampere}$ \\ \hline
+        3 & G & $U_{R4} = 77,3052\;\si{\volt}$ \qquad \qquad $I_{R4} = 2.3426 \;\si{\ampere}$\\ \hline
+        4 & D & $|U_{C_{2}}| = 118.3581\;\si{\volt}$ \qquad \qquad $\varphi_{C_{2}} = 220,7509\degree$ \\ \hline
+        5 & D & $u_C(t) = 25-13\cdot e^{-\dfrac{t}{125}}$ \\ \hline
+    \end{tabular}}
+\end{center}
+\end{document}
